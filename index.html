@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body id="body">
+
+    <script>
+        let body = document.getElementById("body");
+
+        body.style.backgroundColor = "#5C7057";
+        body.style.width = "100%"
+        body.style.display = "flex";
+        body.style.flexDirection = "column"
+        body.style.alignItems = "center"
+        body.style.padding = "10px"
+
+        //FOR THE HEADER
+        let heading = document.createElement("header");
+        heading.textContent = "STUDENT TASK MANAGER";
+
+        heading.style.fontSize = "34px"
+        heading.style.fontWeight = "bold"
+        heading.style.color = "#D1EDD3"
+
+        body.appendChild(heading)
+
+        let form = document.createElement("form");
+        body.appendChild(form)
+
+        form.style.width = "100%"
+        form.style.display = "flex"
+        form.style.justifyContent = "center"
+        form.style.flexWrap = "wrap"
+        form.style.paddingTop = "20px"
+        form.style.alignItems = "center"
+        form.style.gap = "10px"
+
+
+        let input = document.createElement("input");
+        input.type = "text";
+        form.appendChild(input);
+
+        input.style.height = "30px"
+        input.style.maxWidth = "300px"
+        input.style.width = "100%"
+        input.placeholder = "Enter task here"
+
+        let submit = document.createElement("input");
+        submit.type = "button";
+        submit.value = "Add task"
+        submit.id = "btn"
+
+        form.appendChild(submit);
+
+        //Event listener for the addthe task/ submit button
+        submit.addEventListener("click", addTask);
+
+        // Clear all button
+        let clear_btn = document.createElement("input");
+        clear_btn.type = "button";
+        clear_btn.value = "Clear all tasks"
+        clear_btn.id = "clear-btn"
+
+        form.appendChild(clear_btn)
+
+        //keep track of the number of tasks.
+        var count = 0;
+
+        function addTask() {
+            if (input.value.length < 1) {
+                empty_input.textContent = "Invalid input!! Task cannot be empty or less than one";
+            } else {
+                count++;
+                task_count.textContent = `NUMBER OF TASKS: ${count}`;
+
+                let task_div = document.createElement("div");
+                task_div.id = "task";
+                tasks.appendChild(task_div);
+
+                //task div styling
+                task_div.style.display = "flex"
+                task_div.style.gap = "10px"
+                task_div.style.alignItems = "center"
+
+                let task = document.createElement("p");
+                task_div.appendChild(task);
+                task.textContent = input.value;
+                
+                task.style.color = "#FFFFFF"
+
+                let del_btn = document.createElement("input");
+                del_btn.type = "button";
+                del_btn.value = "Delete task"
+                task_div.appendChild(del_btn)
+
+                // task button styling
+                del_btn.style.padding = "6px"
+                del_btn.style.backgroundColor = "#D1EDD3"
+                del_btn.style.color = "#5C7057"
+                del_btn.style.fontSize = "15px"
+                del_btn.style.fontWeight = "normal"
+                del_btn.style.borderRadius = "10px"
+                del_btn.style.height = "35px"
+
+                del_btn.addEventListener("click", function () {
+                    tasks.removeChild(task_div);
+                    count--;
+                    task_count.textContent = `NUMBER OF TASKS: ${count}`;
+                });
+
+                clear_btn.addEventListener("click", clearTasks)
+
+                function clearTasks() {
+                    count = 0;
+                    task_count.textContent = `NUMBER OF TASKS: ${count}`;
+
+                    tasks.replaceChildren();
+
+                }
+            }
+        }
+
+
+        // division to alert if input field empty
+        let empty_input = document.createElement("p");
+        body.appendChild(empty_input);
+        empty_input.style.color = "#FFFFFF"
+
+
+        // to show the count for tasks
+        let task_count = document.createElement("p");
+        task_count.textContent = `NUMBER OF TASKS: ${count}`;
+        body.appendChild(task_count);
+
+        // Create the division to store the added tasks
+        let tasks = document.createElement("section");
+        body.appendChild(tasks);
+
+        // To style the add task and clear all tasks buttons
+
+        submit.style.padding = "10px"
+        submit.style.backgroundColor = "#D1EDD3"
+        submit.style.color = "#5C7057"
+        submit.style.fontSize = "15px"
+        submit.style.fontWeight = "normal"
+        submit.style.borderRadius = "10px"
+
+        clear_btn.style.padding = "10px"
+        clear_btn.style.backgroundColor = "#D1EDD3"
+        clear_btn.style.color = "#5C7057"
+        clear_btn.style.fontSize = "15px"
+        clear_btn.style.fontWeight = "normal"
+        clear_btn.style.borderRadius = "10px"
+
+        task_count.style.color = "#FFFFFF"
+
+        tasks.style.display = "flex"
+        tasks.style.flexDirection = "column"
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
